@@ -1,0 +1,85 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import SupportSection from '../components/SupportSection.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  description: string;
+  pubDate: Date;
+}
+
+const { title, subtitle, description, pubDate } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="article-page container">
+    <header class="article-header">
+      <h1>{title}</h1>
+      {subtitle && <p class="subtitle">{subtitle}</p>}
+      <FormattedDate date={pubDate} />
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+
+    <div class="article-end">
+      <!-- Small illustration: a cup -->
+      <svg class="illustration" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M14 18 C14 18, 13 32, 16 34 C19 36, 29 36, 32 34 C35 32, 34 18, 34 18" stroke="var(--color-illustration)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M34 22 C36 22, 39 23, 39 26 C39 29, 36 30, 34 30" stroke="var(--color-illustration)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+        <path d="M20 14 C20 10, 22 8, 22 8" stroke="var(--color-illustration)" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <path d="M26 14 C26 11, 27 9, 27 9" stroke="var(--color-illustration)" stroke-width="0.8" stroke-linecap="round" fill="none" opacity="0.5"/>
+      </svg>
+
+      <SupportSection />
+    </div>
+
+    <NewsletterForm />
+  </article>
+</BaseLayout>
+
+<style>
+  .article-page {
+    padding-top: 4rem;
+  }
+
+  .article-header {
+    max-width: var(--measure);
+    margin-inline: auto;
+    margin-bottom: 4rem;
+  }
+
+  .article-header h1 {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .article-end {
+    max-width: var(--measure);
+    margin-inline: auto;
+    margin-top: 5rem;
+    text-align: center;
+  }
+
+  .illustration {
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 4rem;
+    opacity: 0.7;
+  }
+</style>

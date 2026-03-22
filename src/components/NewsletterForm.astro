@@ -1,0 +1,109 @@
+---
+---
+
+<section class="newsletter">
+  <p class="newsletter-heading">Receive new reflections</p>
+  <p class="newsletter-note">No noise. Just a quiet note when something new is written.</p>
+  <form class="newsletter-form" data-newsletter>
+    <input
+      type="email"
+      name="email"
+      placeholder="your@email.com"
+      required
+      autocomplete="email"
+      aria-label="Email address"
+    />
+    <button type="submit">subscribe</button>
+  </form>
+  <p class="newsletter-thanks" hidden>Thank you. You'll hear from me.</p>
+</section>
+
+<script>
+  const form = document.querySelector('[data-newsletter]') as HTMLFormElement;
+  const thanks = document.querySelector('.newsletter-thanks') as HTMLElement;
+  if (form && thanks) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.hidden = true;
+      thanks.hidden = false;
+      // Connect to Buttondown, ConvertKit, Formspree, or Netlify Forms
+      // by changing the form action and removing preventDefault
+    });
+  }
+</script>
+
+<style>
+  .newsletter {
+    max-width: var(--measure);
+    margin-inline: auto;
+    margin-top: 6rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .newsletter-heading {
+    font-family: var(--font-accent);
+    font-size: var(--text-xl);
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .newsletter-note {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .newsletter-form input {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--color-border);
+    padding: 0.4rem 0;
+    width: 16rem;
+    max-width: 60vw;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .newsletter-form input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+
+  .newsletter-form input:focus {
+    border-bottom-color: var(--color-accent);
+  }
+
+  .newsletter-form button {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem 0;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+
+  .newsletter-form button:hover {
+    color: var(--color-accent-hover);
+  }
+
+  .newsletter-thanks {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>
