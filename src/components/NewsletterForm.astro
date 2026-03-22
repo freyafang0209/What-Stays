@@ -1,22 +1,25 @@
 ---
 ---
 
-<section class="newsletter">
+<div class="newsletter">
   <p class="newsletter-heading">Receive new reflections</p>
   <p class="newsletter-note">No noise. Just a quiet note when something new is written.</p>
   <form class="newsletter-form" data-newsletter>
-    <input
-      type="email"
-      name="email"
-      placeholder="your@email.com"
-      required
-      autocomplete="email"
-      aria-label="Email address"
-    />
-    <button type="submit">subscribe</button>
+    <div class="input-wrap">
+      <label for="newsletter-email" class="input-label">Email</label>
+      <input
+        id="newsletter-email"
+        type="email"
+        name="email"
+        placeholder="you@example.com"
+        required
+        autocomplete="email"
+      />
+    </div>
+    <button type="submit">Subscribe</button>
   </form>
   <p class="newsletter-thanks" hidden>Thank you. You'll hear from me.</p>
-</section>
+</div>
 
 <script>
   const form = document.querySelector('[data-newsletter]') as HTMLFormElement;
@@ -26,84 +29,104 @@
       e.preventDefault();
       form.hidden = true;
       thanks.hidden = false;
-      // Connect to Buttondown, ConvertKit, Formspree, or Netlify Forms
-      // by changing the form action and removing preventDefault
     });
   }
 </script>
 
 <style>
   .newsletter {
-    max-width: var(--measure);
-    margin-inline: auto;
-    margin-top: 6rem;
-    padding-top: 4rem;
-    border-top: 1px solid var(--color-border);
-    text-align: center;
+    max-width: 420px;
   }
 
   .newsletter-heading {
-    font-family: var(--font-accent);
-    font-size: var(--text-xl);
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
+    font-family: var(--font-serif);
+    font-size: var(--headline-sm);
+    color: var(--on-surface);
+    margin-bottom: var(--space-2);
   }
 
   .newsletter-note {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
+    font-size: var(--body-md);
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-8);
   }
 
   .newsletter-form {
     display: flex;
-    justify-content: center;
-    align-items: baseline;
-    gap: 1rem;
+    align-items: flex-end;
+    gap: var(--space-4);
+  }
+
+  .input-wrap {
+    flex: 1;
+  }
+
+  .input-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--label-md);
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-2);
   }
 
   .newsletter-form input {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    color: var(--color-text);
-    background: transparent;
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: var(--body-md);
+    color: var(--on-surface);
+    background: var(--surface-container-high);
     border: none;
-    border-bottom: 1px dashed var(--color-border);
-    padding: 0.4rem 0;
-    width: 16rem;
-    max-width: 60vw;
+    border-bottom: 1px solid transparent;
+    padding: var(--space-3) var(--space-4);
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color var(--ease-default), background-color var(--ease-default);
   }
 
   .newsletter-form input::placeholder {
-    color: var(--color-text-muted);
-    opacity: 0.6;
+    color: var(--on-surface-variant);
+    opacity: 0.5;
   }
 
   .newsletter-form input:focus {
-    border-bottom-color: var(--color-accent);
+    border-bottom-color: var(--primary);
+    background: var(--surface-container-highest);
+  }
+
+  .newsletter-form input:focus + .input-label,
+  .newsletter-form input:focus ~ .input-label {
+    color: var(--primary);
   }
 
   .newsletter-form button {
-    font-family: var(--font-body);
-    font-size: var(--text-sm);
-    color: var(--color-accent);
-    background: none;
+    font-family: var(--font-sans);
+    font-size: var(--label-lg);
+    font-weight: 500;
+    color: var(--on-primary);
+    background: var(--primary);
     border: none;
+    border-radius: 0.25rem;
+    padding: var(--space-3) var(--space-6);
     cursor: pointer;
-    padding: 0.4rem 0;
-    letter-spacing: 0.03em;
-    transition: color 0.2s;
+    white-space: nowrap;
+    transition: background-color var(--ease-default);
   }
 
   .newsletter-form button:hover {
-    color: var(--color-accent-hover);
+    background: var(--primary-container);
   }
 
   .newsletter-thanks {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
+    font-family: var(--font-serif);
+    font-size: var(--body-lg);
+    color: var(--on-surface-variant);
     font-style: italic;
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-form {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 </style>

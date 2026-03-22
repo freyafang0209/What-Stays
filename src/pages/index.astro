@@ -11,222 +11,317 @@ const recent = sorted.filter(a => a !== featured).slice(0, 4);
 ---
 
 <BaseLayout title="What Stays">
-  <section class="hero container">
-    <h1 class="site-title">What Stays</h1>
-    <p class="tagline">A quiet space for noticing the modern mind</p>
-    <p class="intro">
-      Some things pass through us — news, noise, the scroll of days.
-      And some things stay. This is a place for the things that stay.
-    </p>
+  <!-- Hero: left-aligned, editorial -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">What Stays</h1>
+        <p class="hero-subtitle">A quiet space for noticing<br/>the modern mind</p>
+        <p class="hero-intro">
+          Some things pass through us — news, noise, the scroll of days.
+          And some things stay. This is a place for the things that stay.
+        </p>
+      </div>
+    </div>
   </section>
 
-  <section class="transition container">
-    <p class="transition-text">
-      Between the urgent and the forgotten,<br />
-      there is a quieter place.
-    </p>
-
-    <!-- Small illustration: empty chair by a window -->
-    <svg class="illustration" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect x="8" y="8" width="22" height="28" rx="1" stroke="var(--color-illustration)" stroke-width="1" fill="none"/>
-      <line x1="8" y1="22" x2="30" y2="22" stroke="var(--color-illustration)" stroke-width="0.7"/>
-      <line x1="19" y1="8" x2="19" y2="36" stroke="var(--color-illustration)" stroke-width="0.7"/>
-      <path d="M36 32 C36 28, 38 26, 42 26 C46 26, 48 28, 48 32 L48 42 L36 42 Z" stroke="var(--color-illustration)" stroke-width="1" fill="none"/>
-      <line x1="36" y1="42" x2="34" y2="48" stroke="var(--color-illustration)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="48" y1="42" x2="50" y2="48" stroke="var(--color-illustration)" stroke-width="1" stroke-linecap="round"/>
-    </svg>
+  <!-- Curated Viewport: a breathing pause between sections -->
+  <section class="curated-viewport">
+    <div class="container">
+      <blockquote class="viewport-quote">
+        Between the urgent and the forgotten,<br/>
+        there is a quieter place.
+      </blockquote>
+      <!-- Small illustration offset to the right -->
+      <div class="viewport-illustration">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="8" y="8" width="22" height="28" rx="1" stroke="var(--outline-variant)" stroke-width="1" fill="none"/>
+          <line x1="8" y1="22" x2="30" y2="22" stroke="var(--outline-variant)" stroke-width="0.7"/>
+          <line x1="19" y1="8" x2="19" y2="36" stroke="var(--outline-variant)" stroke-width="0.7"/>
+          <path d="M36 32 C36 28, 38 26, 42 26 C46 26, 48 28, 48 32 L48 42 L36 42 Z" stroke="var(--outline-variant)" stroke-width="1" fill="none"/>
+          <line x1="36" y1="42" x2="34" y2="48" stroke="var(--outline-variant)" stroke-width="1" stroke-linecap="round"/>
+          <line x1="48" y1="42" x2="50" y2="48" stroke="var(--outline-variant)" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
   </section>
 
+  <!-- Featured article: lifted card on tonal background -->
   {featured && (
-    <section class="featured container">
-      <a href={`/articles/${featured.id}/`} class="featured-link">
-        <h2>{featured.data.title}</h2>
-        {featured.data.subtitle && <p class="featured-subtitle">{featured.data.subtitle}</p>}
-        <p class="featured-description">{featured.data.description}</p>
-        <FormattedDate date={featured.data.pubDate} />
-      </a>
+    <section class="featured-section">
+      <div class="container">
+        <a href={`/articles/${featured.id}/`} class="featured-card">
+          <span class="featured-label">Featured</span>
+          <h2 class="featured-title">{featured.data.title}</h2>
+          {featured.data.subtitle && <p class="featured-subtitle">{featured.data.subtitle}</p>}
+          <p class="featured-description">{featured.data.description}</p>
+          <FormattedDate date={featured.data.pubDate} />
+        </a>
+      </div>
     </section>
   )}
 
-  <section class="recent container">
-    <h2 class="section-heading">Recent</h2>
-    <ul class="article-list">
-      {recent.map(article => (
-        <li>
-          <a href={`/articles/${article.id}/`} class="article-link">
-            <span class="article-title">{article.data.title}</span>
-            <span class="article-date"><FormattedDate date={article.data.pubDate} /></span>
-          </a>
-          <p class="article-description">{article.data.description}</p>
-        </li>
-      ))}
-    </ul>
-    <a href="/articles/" class="see-all">See all writings</a>
+  <!-- Recent articles: clean list with tonal section -->
+  <section class="recent-section">
+    <div class="container">
+      <h2 class="section-heading">Recent</h2>
+      <ul class="article-list">
+        {recent.map(article => (
+          <li class="article-item">
+            <a href={`/articles/${article.id}/`} class="article-link">
+              <span class="article-title">{article.data.title}</span>
+              <span class="article-meta"><FormattedDate date={article.data.pubDate} /></span>
+            </a>
+            <p class="article-description">{article.data.description}</p>
+          </li>
+        ))}
+      </ul>
+      <a href="/articles/" class="see-all">All writings</a>
+    </div>
   </section>
 
-  <NewsletterForm />
+  <!-- Newsletter on tonal shift -->
+  <section class="newsletter-section">
+    <div class="container">
+      <NewsletterForm />
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
+  /* --- Hero --- */
   .hero {
-    padding-top: 8rem;
-    padding-bottom: 2rem;
-    text-align: center;
+    padding-top: var(--space-24);
+    padding-bottom: var(--space-16);
   }
 
-  .site-title {
+  .hero-content {
+    max-width: 540px;
+    /* Left-aligned, not centered — Rule of Thirds */
+  }
+
+  .hero-title {
     font-family: var(--font-accent);
-    font-size: var(--text-3xl);
+    font-size: var(--display-lg);
     font-weight: 400;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
+    color: var(--on-surface);
+    margin-bottom: var(--space-3);
+    line-height: 1.1;
   }
 
-  .tagline {
+  .hero-subtitle {
     font-family: var(--font-serif);
-    font-size: var(--text-lg);
-    color: var(--color-text-muted);
+    font-size: var(--headline-sm);
+    color: var(--on-surface-variant);
     font-style: italic;
-    margin-bottom: 2rem;
+    line-height: var(--leading-headline);
+    margin-bottom: var(--space-8);
   }
 
-  .intro {
-    max-width: 42ch;
-    margin-inline: auto;
-    color: var(--color-text-muted);
-    font-size: var(--text-base);
+  .hero-intro {
+    color: var(--on-surface-variant);
+    font-size: var(--body-lg);
     line-height: var(--leading-body);
+    max-width: 44ch;
   }
 
-  .transition {
-    padding-block: 6rem;
-    text-align: center;
+  /* --- Curated Viewport --- */
+  .curated-viewport {
+    padding-block: var(--space-24);
+    background-color: var(--surface-container-low);
   }
 
-  .transition-text {
+  .curated-viewport .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-10);
+  }
+
+  .viewport-quote {
     font-family: var(--font-serif);
-    font-size: var(--text-base);
-    color: var(--color-text-muted);
-    font-style: italic;
-    line-height: var(--leading-relaxed);
-    margin-bottom: 3rem;
+    font-size: var(--display-md);
+    line-height: var(--leading-display);
+    color: var(--on-surface);
+    max-width: 16ch;
+    border: none;
+    padding: 0;
+    margin: 0;
   }
 
-  .illustration {
+  .viewport-illustration {
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  /* --- Featured --- */
+  .featured-section {
+    padding-block: var(--space-16);
+  }
+
+  .featured-card {
     display: block;
-    margin-inline: auto;
-    opacity: 0.6;
-  }
-
-  .featured {
-    padding-bottom: 4rem;
-  }
-
-  .featured-link {
-    display: block;
-    max-width: var(--measure);
-    margin-inline: auto;
     text-decoration: none;
-    padding: 2rem 0;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+    background: var(--surface-container-lowest);
+    padding: var(--space-10);
+    max-width: 640px;
+    transition: box-shadow var(--ease-default);
   }
 
-  .featured-link:hover h2 {
-    color: var(--color-accent);
+  .featured-card:hover {
+    box-shadow: 0 8px 40px -10px rgba(28, 27, 24, 0.06);
   }
 
-  .featured-link h2 {
+  .featured-label {
+    font-family: var(--font-sans);
+    font-size: var(--label-sm);
+    font-weight: 600;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--space-4);
+  }
+
+  .featured-title {
     font-family: var(--font-serif);
-    font-size: var(--text-xl);
+    font-size: var(--headline-lg);
     font-weight: 400;
-    color: var(--color-text);
-    margin-bottom: 0.4rem;
-    transition: color 0.2s;
+    color: var(--on-surface);
+    margin-bottom: var(--space-2);
+    transition: color var(--ease-default);
+  }
+
+  .featured-card:hover .featured-title {
+    color: var(--primary);
   }
 
   .featured-subtitle {
-    font-size: var(--text-base);
-    color: var(--color-text-muted);
+    font-family: var(--font-serif);
+    font-size: var(--body-lg);
+    color: var(--on-surface-variant);
     font-style: italic;
-    margin-bottom: 0.8rem;
+    margin-bottom: var(--space-4);
   }
 
   .featured-description {
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
-    margin-bottom: 0.8rem;
+    font-size: var(--body-md);
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-4);
+    max-width: 50ch;
   }
 
-  .recent {
-    padding-bottom: 2rem;
+  /* --- Recent --- */
+  .recent-section {
+    padding-block: var(--space-16);
+    background-color: var(--surface-container-low);
   }
 
   .section-heading {
     font-family: var(--font-serif);
-    font-size: var(--text-lg);
+    font-size: var(--headline-sm);
     font-weight: 400;
-    max-width: var(--measure);
-    margin-inline: auto;
-    margin-bottom: 2rem;
-    color: var(--color-text);
+    margin-bottom: var(--space-8);
   }
 
   .article-list {
     list-style: none;
-    max-width: var(--measure);
-    margin-inline: auto;
+    max-width: 640px;
   }
 
-  .article-list li {
-    padding-block: 1.5rem;
-    border-bottom: 1px solid var(--color-border);
+  .article-item {
+    padding-block: var(--space-6);
   }
 
-  .article-list li:first-child {
-    border-top: 1px solid var(--color-border);
+  /* Tonal separator between items instead of border */
+  .article-item + .article-item {
+    background-image: linear-gradient(var(--surface-container), var(--surface-container));
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    /* ghost border at 15% opacity effect */
   }
 
   .article-link {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 1rem;
+    gap: var(--space-4);
     text-decoration: none;
-    margin-bottom: 0.3rem;
+    margin-bottom: var(--space-1);
   }
 
   .article-title {
     font-family: var(--font-serif);
-    font-size: var(--text-base);
-    color: var(--color-text);
-    transition: color 0.2s;
+    font-size: var(--body-lg);
+    color: var(--on-surface);
+    transition: color var(--ease-default);
   }
 
   .article-link:hover .article-title {
-    color: var(--color-accent);
+    color: var(--primary);
   }
 
-  .article-date {
+  .article-meta {
     flex-shrink: 0;
   }
 
   .article-description {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    line-height: 1.5;
+    font-size: var(--body-md);
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+    max-width: 50ch;
   }
 
   .see-all {
-    display: block;
-    max-width: var(--measure);
-    margin-inline: auto;
-    margin-top: 2rem;
-    font-size: var(--text-sm);
-    color: var(--color-accent);
+    display: inline-block;
+    margin-top: var(--space-8);
+    font-family: var(--font-sans);
+    font-size: var(--label-lg);
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+    transition: color var(--ease-default);
   }
 
   .see-all:hover {
-    color: var(--color-accent-hover);
+    color: var(--primary-container);
+  }
+
+  /* --- Newsletter Section --- */
+  .newsletter-section {
+    padding-block: var(--space-20);
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 640px) {
+    .hero {
+      padding-top: var(--space-16);
+      padding-bottom: var(--space-12);
+    }
+
+    .hero-title {
+      font-size: var(--display-md);
+    }
+
+    .curated-viewport .container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-8);
+    }
+
+    .viewport-quote {
+      font-size: var(--headline-lg);
+      max-width: 100%;
+    }
+
+    .featured-card {
+      padding: var(--space-8);
+    }
+
+    .article-link {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
   }
 </style>

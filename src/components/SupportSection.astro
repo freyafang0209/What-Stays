@@ -2,24 +2,26 @@
 ---
 
 <p class="support">
-  If these words stay with you — <a href="#" target="_blank" rel="noopener noreferrer">support this work</a>.
+  If these words stay with you —
+  <a href="#" target="_blank" rel="noopener noreferrer">support this work</a>
 </p>
 
 <style>
   .support {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    text-align: center;
+    font-family: var(--font-serif);
+    font-size: var(--body-lg);
+    color: var(--on-surface-variant);
+    font-style: italic;
   }
 
   .support a {
-    color: var(--color-accent);
-    text-decoration: underline;
-    text-decoration-style: dotted;
-    text-underline-offset: 3px;
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--ease-default);
   }
 
   .support a:hover {
-    color: var(--color-accent-hover);
+    border-bottom-color: var(--primary);
   }
 </style>

@@ -8,79 +8,89 @@ const sorted = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubD
 ---
 
 <BaseLayout title="Writings" description="All writings from What Stays.">
-  <section class="page container">
-    <h1>Writings</h1>
+  <section class="page">
+    <div class="container">
+      <h1>Writings</h1>
 
-    <ul class="article-list">
-      {sorted.map(article => (
-        <li>
-          <a href={`/articles/${article.id}/`} class="article-link">
-            <span class="article-title">{article.data.title}</span>
-            <span class="article-date"><FormattedDate date={article.data.pubDate} /></span>
-          </a>
-          <p class="article-description">{article.data.description}</p>
-        </li>
-      ))}
-    </ul>
+      <ul class="article-list">
+        {sorted.map(article => (
+          <li class="article-item">
+            <a href={`/articles/${article.id}/`} class="article-link">
+              <span class="article-title">{article.data.title}</span>
+              <span class="article-meta"><FormattedDate date={article.data.pubDate} /></span>
+            </a>
+            <p class="article-description">{article.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   </section>
 </BaseLayout>
 
 <style>
   .page {
-    padding-top: 6rem;
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-16);
   }
 
   h1 {
     font-family: var(--font-serif);
-    font-size: var(--text-2xl);
+    font-size: var(--headline-lg);
     font-weight: 400;
-    max-width: var(--measure);
-    margin-inline: auto;
-    margin-bottom: 4rem;
+    margin-bottom: var(--space-12);
   }
 
   .article-list {
     list-style: none;
-    max-width: var(--measure);
-    margin-inline: auto;
+    max-width: 640px;
   }
 
-  .article-list li {
-    padding-block: 1.5rem;
-    border-bottom: 1px solid var(--color-border);
+  .article-item {
+    padding-block: var(--space-6);
   }
 
-  .article-list li:first-child {
-    border-top: 1px solid var(--color-border);
+  .article-item + .article-item {
+    background-image: linear-gradient(var(--surface-container), var(--surface-container));
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
   }
 
   .article-link {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 1rem;
+    gap: var(--space-4);
     text-decoration: none;
-    margin-bottom: 0.3rem;
+    margin-bottom: var(--space-1);
   }
 
   .article-title {
     font-family: var(--font-serif);
-    font-size: var(--text-base);
-    color: var(--color-text);
-    transition: color 0.2s;
+    font-size: var(--body-lg);
+    color: var(--on-surface);
+    transition: color var(--ease-default);
   }
 
   .article-link:hover .article-title {
-    color: var(--color-accent);
+    color: var(--primary);
   }
 
-  .article-date {
+  .article-meta {
     flex-shrink: 0;
   }
 
   .article-description {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    line-height: 1.5;
+    font-size: var(--body-md);
+    color: var(--on-surface-variant);
+    line-height: 1.6;
+    max-width: 50ch;
+  }
+
+  @media (max-width: 640px) {
+    .article-link {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
   }
 </style>

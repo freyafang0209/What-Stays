@@ -1,7 +1,9 @@
 /* ----------------------------------------
-   What Stays — Design System
-   "The design should feel like it was barely designed."
+   What Stays — The Meditative Archive
+   Design System: "Soulful quiet, not cold austerity"
    ---------------------------------------- */
+
+/* --- Fonts --- */
 
 @font-face {
   font-family: 'Caveat';
@@ -12,51 +14,97 @@
 }
 
 @font-face {
-  font-family: 'Lora';
-  src: url('/fonts/Lora-Regular.woff2') format('woff2');
-  font-weight: 400;
+  font-family: 'Newsreader';
+  src: url('/fonts/Newsreader-Regular.woff2') format('woff2');
+  font-weight: 400 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Lora';
-  src: url('/fonts/Lora-Italic.woff2') format('woff2');
+  font-family: 'Newsreader';
+  src: url('/fonts/Newsreader-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
-:root {
-  /* Colors */
-  --color-bg: #FAF9F7;
-  --color-text: #2C2C2C;
-  --color-text-muted: #9A9A95;
-  --color-accent: #8A7E72;
-  --color-accent-hover: #6B6158;
-  --color-border: #E8E5E0;
-  --color-illustration: #C8C2B8;
-
-  /* Typography */
-  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
-  --font-body: -apple-system, 'Segoe UI', system-ui, sans-serif;
-  --font-accent: 'Caveat', cursive;
-
-  --text-sm: 0.875rem;
-  --text-base: 1.0625rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.625rem;
-  --text-2xl: 2.25rem;
-  --text-3xl: 3.25rem;
-
-  --leading-tight: 1.3;
-  --leading-body: 1.85;
-  --leading-relaxed: 2;
-
-  --measure: 58ch;
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/Manrope-Variable.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* Reset */
+/* --- Design Tokens --- */
+
+:root {
+  /* Surface hierarchy (stacked paper metaphor) */
+  --surface: #fcf9f2;
+  --surface-container-low: #f6f3ec;
+  --surface-container: #f1eee7;
+  --surface-container-high: #ebe8e1;
+  --surface-container-highest: #e5e2dc;
+  --surface-container-lowest: #ffffff;
+
+  /* Content colors */
+  --primary: #69594b;
+  --primary-container: #837163;
+  --on-primary: #ffffff;
+  --on-primary-container: #fffbff;
+  --tertiary: #595e4b;
+
+  --on-surface: #1c1b18;
+  --on-surface-variant: #4e453f;
+  --outline-variant: #d1c4bb;
+
+  /* Typography */
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
+  --font-accent: 'Caveat', cursive;
+
+  /* Display & Heading scale (Newsreader) */
+  --display-lg: 3.25rem;
+  --display-md: 2.5rem;
+  --headline-lg: 2rem;
+  --headline-md: 1.625rem;
+  --headline-sm: 1.375rem;
+
+  /* Body & Label scale (Manrope) */
+  --body-lg: 1.0625rem;
+  --body-md: 0.9375rem;
+  --label-lg: 0.9375rem;
+  --label-md: 0.8125rem;
+  --label-sm: 0.6875rem;
+
+  /* Leading */
+  --leading-display: 1.2;
+  --leading-headline: 1.3;
+  --leading-body: 1.8;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 3.5rem;
+  --space-12: 4rem;
+  --space-16: 5.5rem;
+  --space-20: 7rem;
+  --space-24: 8.5rem;
+
+  /* Measure */
+  --measure: 60ch;
+
+  /* Transitions — slow & weighted */
+  --ease-default: 450ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* --- Reset --- */
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -70,11 +118,11 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
+  font-family: var(--font-sans);
+  font-size: var(--body-lg);
   line-height: var(--leading-body);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--on-surface);
+  background-color: var(--surface);
   min-height: 100vh;
 }
 
@@ -83,46 +131,50 @@ img, svg {
   max-width: 100%;
 }
 
-/* Base typography */
+/* --- Base Typography --- */
+
 h1, h2, h3 {
   font-family: var(--font-serif);
   font-weight: 400;
-  line-height: var(--leading-tight);
-  letter-spacing: 0.01em;
+  color: var(--on-surface);
 }
 
 h1 {
-  font-size: var(--text-2xl);
+  font-size: var(--headline-lg);
+  line-height: var(--leading-display);
+  letter-spacing: -0.01em;
 }
 
 h2 {
-  font-size: var(--text-xl);
+  font-size: var(--headline-md);
+  line-height: var(--leading-headline);
 }
 
 h3 {
-  font-size: var(--text-lg);
+  font-size: var(--headline-sm);
+  line-height: var(--leading-headline);
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--primary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--ease-default);
 }
 
 a:hover {
-  color: var(--color-accent-hover);
+  color: var(--primary-container);
 }
 
-/* Prose — for article body content */
+/* --- Prose (article body) --- */
+
 .prose {
   max-width: var(--measure);
-  margin-inline: auto;
-  font-size: var(--text-base);
+  font-size: var(--body-lg);
   line-height: var(--leading-body);
 }
 
 .prose p {
-  margin-block: 1.6em;
+  margin-block: 1.5em;
 }
 
 .prose p:first-child {
@@ -140,11 +192,13 @@ a:hover {
 }
 
 .prose blockquote {
-  border-left: 2px solid var(--color-border);
   padding-left: 1.5em;
   margin-block: 2em;
+  font-family: var(--font-serif);
   font-style: italic;
-  color: var(--color-text-muted);
+  font-size: var(--headline-sm);
+  line-height: var(--leading-headline);
+  color: var(--primary);
 }
 
 .prose ul, .prose ol {
@@ -164,20 +218,28 @@ a:hover {
   font-weight: 600;
 }
 
+/* No <hr> dividers — use tonal shifts instead */
 .prose hr {
   border: none;
-  border-top: 1px solid var(--color-border);
-  margin-block: 3em;
+  height: var(--space-12);
 }
 
-/* Layout utility */
+/* --- Layout --- */
+
 .container {
-  max-width: 640px;
+  max-width: 1080px;
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: var(--space-6);
 }
 
-/* Visually hidden */
+.container--narrow {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+/* --- Utility --- */
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -188,4 +250,10 @@ a:hover {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* --- Ambient Shadow (for floating elements only) --- */
+
+.ambient-shadow {
+  box-shadow: 0 8px 40px -10px rgba(28, 27, 24, 0.05);
 }

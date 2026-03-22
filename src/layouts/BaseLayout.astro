@@ -18,31 +18,31 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" href="/fonts/Lora-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Newsreader-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Manrope-Variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Caveat-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="alternate" type="application/rss+xml" title="What Stays" href="/rss.xml" />
     <title>{fullTitle}</title>
   </head>
   <body>
-    <slot name="header">
-      <header class="site-header">
-        <nav class="container">
-          <a href="/" class="site-name">What Stays</a>
-          <div class="nav-links">
-            <a href="/articles/">Writings</a>
-            <a href="/about/">About</a>
-          </div>
-        </nav>
-      </header>
-    </slot>
+    <header class="site-header">
+      <nav class="container">
+        <a href="/" class="site-name">What Stays</a>
+        <div class="nav-links">
+          <a href="/articles/">Writings</a>
+          <a href="/about/">About</a>
+        </div>
+      </nav>
+    </header>
 
     <main>
       <slot />
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <p>What Stays</p>
+      <div class="container footer-inner">
+        <span class="footer-name">What Stays</span>
+        <a href="/rss.xml" class="footer-rss">RSS</a>
       </div>
     </footer>
   </body>
@@ -52,7 +52,7 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
   @import '../styles/global.css';
 
   .site-header {
-    padding-block: 2rem;
+    padding-block: var(--space-8);
   }
 
   .site-header nav {
@@ -63,44 +63,67 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
 
   .site-name {
     font-family: var(--font-accent);
-    font-size: 1.5rem;
-    color: var(--color-text);
+    font-size: 1.6rem;
+    color: var(--on-surface);
     text-decoration: none;
+    transition: color var(--ease-default);
   }
 
   .site-name:hover {
-    color: var(--color-accent);
+    color: var(--primary);
   }
 
   .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: var(--space-8);
   }
 
   .nav-links a {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--label-lg);
+    font-weight: 500;
+    color: var(--on-surface-variant);
     text-decoration: none;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
+    transition: color var(--ease-default);
   }
 
   .nav-links a:hover {
-    color: var(--color-text);
+    color: var(--primary);
   }
 
   main {
     min-height: 60vh;
   }
 
+  /* Footer uses tonal shift, not a border */
   .site-footer {
-    margin-top: 8rem;
-    padding-block: 3rem;
-    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-24);
+    padding-block: var(--space-10);
+    background-color: var(--surface-container-low);
   }
 
-  .site-footer p {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    text-align: center;
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .footer-name {
+    font-family: var(--font-accent);
+    font-size: var(--body-lg);
+    color: var(--on-surface-variant);
+  }
+
+  .footer-rss {
+    font-size: var(--label-md);
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .footer-rss:hover {
+    color: var(--primary);
   }
 </style>
