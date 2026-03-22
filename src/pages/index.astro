@@ -10,30 +10,42 @@ const featured = sorted.find(a => a.data.featured);
 const recent = sorted.filter(a => a !== featured).slice(0, 4);
 ---
 
-<BaseLayout title="What Stays">
-  <!-- Hero: left-aligned, editorial -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1 class="hero-title">What Stays</h1>
-        <p class="hero-subtitle">A quiet space for noticing<br/>the modern mind</p>
-        <p class="hero-intro">
-          Some things pass through us — news, noise, the scroll of days.
-          And some things stay. This is a place for the things that stay.
-        </p>
-      </div>
+<BaseLayout title="What Stays" fullscreenHero>
+  <!-- Atmosphere -->
+  <div class="bg-ambient" aria-hidden="true"></div>
+  <svg class="grain" aria-hidden="true" preserveAspectRatio="none">
+    <filter id="grain-filter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain-filter)"/>
+  </svg>
+
+  <!-- Screen 1: Hero — illustrated cliffs backdrop -->
+  <section class="snap-section hero">
+    <img src="/images/hero-cliffs.png" alt="" class="hero-bg" aria-hidden="true" />
+    <div class="hero-content">
+      <h1 class="hero-title">What Stays</h1>
+      <hr class="hero-rule" />
+      <p class="hero-subtitle">A quiet space for the thoughts that linger.</p>
+    </div>
+    <svg class="hero-sparkle" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <path d="M14 0 C14.5 9 19 13.5 28 14 C19 14.5 14.5 19 14 28 C13.5 19 9 14.5 0 14 C9 13.5 13.5 9 14 0Z" fill="rgba(255,255,255,0.6)"/>
+    </svg>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 7l6 6 6-6"/>
+      </svg>
     </div>
   </section>
 
-  <!-- Curated Viewport: a breathing pause between sections -->
-  <section class="curated-viewport">
-    <div class="container">
-      <blockquote class="viewport-quote">
+  <!-- Screen 2: Philosophy -->
+  <section class="snap-section philosophy">
+    <div class="philosophy-inner">
+      <blockquote class="philosophy-quote">
         Between the urgent and the forgotten,<br/>
         there is a quieter place.
       </blockquote>
-      <!-- Small illustration offset to the right -->
-      <div class="viewport-illustration">
+      <div class="philosophy-illustration">
         <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect x="8" y="8" width="22" height="28" rx="1" stroke="var(--outline-variant)" stroke-width="1" fill="none"/>
           <line x1="8" y1="22" x2="30" y2="22" stroke="var(--outline-variant)" stroke-width="0.7"/>
@@ -46,7 +58,19 @@ const recent = sorted.filter(a => a !== featured).slice(0, 4);
     </div>
   </section>
 
-  <!-- Featured article: lifted card on tonal background -->
+  <!-- Screen 3: Manifesto -->
+  <section class="snap-section manifesto">
+    <div class="manifesto-content">
+      <p class="manifesto-text">
+        Some things pass through us —<br/>
+        news, noise, the scroll of days.<br/>
+        And some things stay.
+      </p>
+      <p class="manifesto-coda">This is a place for the things that stay.</p>
+    </div>
+  </section>
+
+  <!-- Featured article -->
   {featured && (
     <section class="featured-section">
       <div class="container">
@@ -61,7 +85,7 @@ const recent = sorted.filter(a => a !== featured).slice(0, 4);
     </section>
   )}
 
-  <!-- Recent articles: clean list with tonal section -->
+  <!-- Recent articles -->
   <section class="recent-section">
     <div class="container">
       <h2 class="section-heading">Recent</h2>
@@ -80,7 +104,7 @@ const recent = sorted.filter(a => a !== featured).slice(0, 4);
     </div>
   </section>
 
-  <!-- Newsletter on tonal shift -->
+  <!-- Newsletter -->
   <section class="newsletter-section">
     <div class="container">
       <NewsletterForm />
@@ -88,59 +112,142 @@ const recent = sorted.filter(a => a !== featured).slice(0, 4);
   </section>
 </BaseLayout>
 
+<style is:global>
+  html {
+    scroll-snap-type: y proximity;
+    background-color: #FBFBFB;
+  }
+</style>
+
 <style>
+  /* --- Atmosphere --- */
+  .grain {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  .bg-ambient {
+    background-color: var(--bg-base);
+    background-image:
+      radial-gradient(at 0% 0%, var(--glow-1) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, var(--glow-2) 0px, transparent 50%);
+    filter: blur(80px);
+    opacity: 0.6;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* --- Scroll Snap Sections --- */
+  .snap-section {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   /* --- Hero --- */
   .hero {
-    padding-top: var(--space-24);
-    padding-bottom: var(--space-16);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
   }
 
   .hero-content {
-    max-width: 560px;
-    margin-inline: auto;
+    position: relative;
+    z-index: 1;
     text-align: center;
   }
 
   .hero-title {
     font-family: var(--font-accent);
-    font-size: var(--display-lg);
+    font-size: clamp(3rem, 8vw, 5.5rem);
     font-weight: 400;
     color: var(--on-surface);
-    margin-bottom: var(--space-4);
     line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-rule {
+    width: 3rem;
+    height: 1px;
+    border: none;
+    background-color: var(--on-surface-variant);
+    margin: var(--space-6) auto;
+    opacity: 0.4;
   }
 
   .hero-subtitle {
     font-family: var(--font-serif);
-    font-size: var(--headline-sm);
+    font-size: var(--body-lg);
     color: var(--on-surface-variant);
     font-style: italic;
-    line-height: var(--leading-headline);
-    margin-bottom: var(--space-8);
-  }
-
-  .hero-intro {
-    color: var(--on-surface-variant);
-    font-size: var(--body-lg);
     line-height: var(--leading-body);
-    max-width: 44ch;
-    margin-inline: auto;
   }
 
-  /* --- Curated Viewport --- */
-  .curated-viewport {
-    padding-block: var(--space-24);
-    background-color: var(--surface-container-low);
+  .hero-sparkle {
+    position: absolute;
+    bottom: var(--space-10);
+    right: var(--space-10);
+    z-index: 1;
+    opacity: 0;
+    animation: sparkle-in 2s ease 1.5s forwards;
   }
 
-  .curated-viewport .container {
+  @keyframes sparkle-in {
+    to { opacity: 1; }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    animation: fade-in 1.5s ease 2s forwards, float 3s ease-in-out 3.5s infinite;
+  }
+
+  @keyframes fade-in {
+    to { opacity: 1; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* --- Philosophy --- */
+  .philosophy {
+    background-color: rgba(246, 243, 236, 0.7);
+  }
+
+  .philosophy-inner {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: var(--space-16);
+    padding-inline: var(--space-8);
   }
 
-  .viewport-quote {
+  .philosophy-quote {
     font-family: var(--font-serif);
     font-size: var(--headline-lg);
     line-height: var(--leading-headline);
@@ -150,9 +257,31 @@ const recent = sorted.filter(a => a !== featured).slice(0, 4);
     margin: 0;
   }
 
-  .viewport-illustration {
+  .philosophy-illustration {
     flex-shrink: 0;
     opacity: 0.45;
+  }
+
+  /* --- Manifesto --- */
+  .manifesto-content {
+    text-align: center;
+    padding-inline: var(--space-8);
+    max-width: 560px;
+  }
+
+  .manifesto-text {
+    font-family: var(--font-serif);
+    font-size: var(--headline-md);
+    line-height: var(--leading-headline);
+    color: var(--on-surface);
+    margin-bottom: var(--space-8);
+  }
+
+  .manifesto-coda {
+    font-family: var(--font-serif);
+    font-size: var(--body-lg);
+    color: var(--on-surface-variant);
+    font-style: italic;
   }
 
   /* --- Featured --- */
@@ -293,7 +422,7 @@ const recent = sorted.filter(a => a !== featured).slice(0, 4);
     color: var(--primary-container);
   }
 
-  /* --- Newsletter Section --- */
+  /* --- Newsletter --- */
   .newsletter-section {
     padding-block: var(--space-20);
   }
@@ -305,22 +434,22 @@ const recent = sorted.filter(a => a !== featured).slice(0, 4);
 
   /* --- Responsive --- */
   @media (max-width: 640px) {
-    .hero {
-      padding-top: var(--space-16);
-      padding-bottom: var(--space-12);
+    .hero-sparkle {
+      bottom: var(--space-8);
+      right: var(--space-8);
     }
 
-    .hero-title {
-      font-size: var(--display-md);
-    }
-
-    .curated-viewport .container {
+    .philosophy-inner {
       flex-direction: column;
       gap: var(--space-8);
     }
 
-    .viewport-quote {
+    .philosophy-quote {
       font-size: var(--headline-md);
+    }
+
+    .manifesto-text {
+      font-size: var(--headline-sm);
     }
 
     .featured-card {

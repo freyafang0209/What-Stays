@@ -40,6 +40,11 @@
 /* --- Design Tokens --- */
 
 :root {
+  /* Ambient canvas */
+  --bg-base: #FBFBFB;
+  --glow-1: rgba(227, 232, 240, 0.4);
+  --glow-2: rgba(240, 235, 227, 0.4);
+
   /* Surface hierarchy (stacked paper metaphor) */
   --surface: #fcf9f2;
   --surface-container-low: #f6f3ec;

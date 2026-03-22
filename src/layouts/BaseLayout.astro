@@ -2,9 +2,10 @@
 interface Props {
   title: string;
   description?: string;
+  fullscreenHero?: boolean;
 }
 
-const { title, description = 'A quiet space for noticing the modern mind' } = Astro.props;
+const { title, description = 'A quiet space for noticing the modern mind', fullscreenHero = false } = Astro.props;
 const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
 ---
 
@@ -24,7 +25,7 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
     <link rel="alternate" type="application/rss+xml" title="What Stays" href="/rss.xml" />
     <title>{fullTitle}</title>
   </head>
-  <body>
+  <body class:list={[{ 'fullscreen-hero': fullscreenHero }]}>
     <header class="site-header">
       <nav class="container">
         <a href="/" class="site-name">What Stays</a>
@@ -125,5 +126,22 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
 
   .footer-rss:hover {
     color: var(--primary);
+  }
+
+  /* Fullscreen hero mode: header overlays content, footer loses top margin */
+  :global(body.fullscreen-hero) .site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+
+  :global(body.fullscreen-hero) .site-footer {
+    margin-top: 0;
+  }
+
+  :global(body.fullscreen-hero) {
+    background-color: transparent;
   }
 </style>
