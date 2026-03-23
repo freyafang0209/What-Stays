@@ -4,6 +4,7 @@ subtitle: "Doors, questions, and the discomfort of not finishing"
 description: "Why we struggle to sit with incompleteness, and why it matters."
 pubDate: 2026-02-14
 tags: ["uncertainty", "patience", "anxiety"]
+draft: true
 ---
 
 I've been thinking about open doors.

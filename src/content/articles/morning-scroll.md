@@ -4,6 +4,7 @@ subtitle: "What we reach for before we reach for ourselves"
 description: "The ritual of the morning phone check, and what it costs us."
 pubDate: 2026-03-08
 tags: ["ritual", "technology", "morning"]
+draft: true
 ---
 
 The first thing I do every morning is reach for my phone. Not to call anyone. Not because something is urgent. Just because my hand knows the way.

@@ -5,6 +5,7 @@ description: "A reflection on how our open browser tabs mirror the open loops in
 pubDate: 2026-03-15
 tags: ["attention", "technology", "presence"]
 featured: true
+draft: true
 ---
 
 I have forty-three tabs open right now. I counted.

@@ -4,6 +4,7 @@ subtitle: "Finding rhythm in a world that forgot slowness"
 description: "Listening to rain as an act of resistance against hurry."
 pubDate: 2026-02-28
 tags: ["nature", "slowness", "presence"]
+draft: true
 ---
 
 It rained all day yesterday. Not dramatically — no thunder, no spectacle. Just a steady, quiet rain that turned the windows into something worth watching.

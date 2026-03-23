@@ -4,6 +4,7 @@ subtitle: "Dear interruptions, we need to talk"
 description: "An epistolary reflection on our relationship with the sounds that shape our days."
 pubDate: 2026-01-30
 tags: ["technology", "attention", "letters"]
+draft: true
 ---
 
 Dear Notifications,
