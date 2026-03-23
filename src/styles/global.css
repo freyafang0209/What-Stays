@@ -173,6 +173,7 @@ a:hover {
 
 .prose {
   max-width: var(--measure);
+  margin-inline: auto;
   font-size: var(--body-lg);
   line-height: var(--leading-body);
 }
@@ -239,7 +240,7 @@ a:hover {
 .container--narrow {
   max-width: 720px;
   margin-inline: auto;
-  padding-inline: clamp(1.5rem, 6vw, 5rem);
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
 }
 
 /* --- Utility --- */

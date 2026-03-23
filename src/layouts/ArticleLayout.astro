@@ -48,16 +48,24 @@ const { title, subtitle, description, pubDate } = Astro.props;
   </article>
 </BaseLayout>
 
-<style>
+<style is:global>
   .article-page {
     padding-top: var(--space-16);
   }
 
-  .article-header {
+  .article-page .container--narrow {
+    max-width: 720px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 4rem);
+  }
+
+  .article-page .article-header {
+    max-width: 60ch;
+    margin-inline: auto;
     margin-bottom: var(--space-12);
   }
 
-  .article-header h1 {
+  .article-page .article-header h1 {
     font-family: var(--font-serif);
     font-size: var(--display-md);
     font-weight: 400;
@@ -66,7 +74,7 @@ const { title, subtitle, description, pubDate } = Astro.props;
     margin-bottom: var(--space-2);
   }
 
-  .subtitle {
+  .article-page .subtitle {
     font-family: var(--font-serif);
     font-size: var(--headline-sm);
     color: var(--on-surface-variant);
@@ -74,27 +82,55 @@ const { title, subtitle, description, pubDate } = Astro.props;
     line-height: var(--leading-headline);
   }
 
-  .article-end {
+  .article-page .prose {
+    max-width: 60ch;
+    margin-inline: auto;
+    font-size: var(--body-lg);
+    line-height: var(--leading-body);
+  }
+
+  .article-page .prose p {
+    margin-block: 1.5em;
+  }
+
+  .article-page .prose p:first-child {
+    margin-top: 0;
+  }
+
+  .article-page .article-end {
     margin-top: var(--space-20);
     text-align: center;
   }
 
-  .illustration {
+  .article-page .illustration {
     display: block;
     margin-inline: auto;
     margin-bottom: var(--space-10);
     opacity: 0.5;
   }
 
-  .newsletter-band {
+  .article-page .newsletter-band {
     margin-top: var(--space-20);
     padding-block: var(--space-16);
     background-color: var(--surface-container-low);
   }
 
   @media (max-width: 640px) {
-    .article-header h1 {
+    .article-page {
+      padding-top: var(--space-10);
+    }
+
+    .article-page .article-header h1 {
       font-size: var(--headline-lg);
+    }
+
+    .article-page .article-header {
+      margin-bottom: var(--space-8);
+    }
+
+    .article-page .prose {
+      font-size: 1rem;
+      line-height: 1.85;
     }
   }
 </style>
