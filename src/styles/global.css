@@ -40,29 +40,28 @@
 /* --- Design Tokens --- */
 
 :root {
-  /* Ambient canvas */
-  --bg-base: #FBFBFB;
-  --glow-1: rgba(227, 232, 240, 0.4);
-  --glow-2: rgba(240, 235, 227, 0.4);
+  /* Ambient canvas (sky + sea) */
+  --bg-base: #f1f2f4;
+  --glow-1: rgba(195, 208, 222, 0.35);
+  --glow-2: rgba(212, 208, 198, 0.30);
 
-  /* Surface hierarchy (stacked paper metaphor) */
-  --surface: #fcf9f2;
-  --surface-container-low: #f6f3ec;
-  --surface-container: #f1eee7;
-  --surface-container-high: #ebe8e1;
-  --surface-container-highest: #e5e2dc;
-  --surface-container-lowest: #ffffff;
+  /* Surface hierarchy (grey sky tonal stack) */
+  --surface: #f1f2f4;
+  --surface-container-low: #eaecef;
+  --surface-container: #e4e6ea;
+  --surface-container-high: #dde0e5;
+  --surface-container-highest: #d7dae0;
+  --surface-container-lowest: #f7f8f9;
 
-  /* Content colors */
-  --primary: #69594b;
-  --primary-container: #837163;
+  /* Content colors (sea-derived) */
+  --primary: #6b8294;
+  --primary-container: #8699a8;
   --on-primary: #ffffff;
-  --on-primary-container: #fffbff;
-  --tertiary: #595e4b;
+  --on-primary-container: #f8fafe;
 
-  --on-surface: #1c1b18;
-  --on-surface-variant: #4e453f;
-  --outline-variant: #d1c4bb;
+  --on-surface: #1d2126;
+  --on-surface-variant: #586068;
+  --outline-variant: #c4c9cf;
 
   /* Typography */
   --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
