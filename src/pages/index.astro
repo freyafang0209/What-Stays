@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
 const sorted = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const recent = sorted.slice(0, 3);
+const recent = sorted.slice(0, 2);
 ---
 
 <BaseLayout title="What Stays" fullscreenHero>
