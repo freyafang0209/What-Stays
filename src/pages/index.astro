@@ -27,9 +27,6 @@ const recent = sorted.slice(0, 3);
       <hr class="hero-rule" />
       <p class="hero-subtitle"><strong>A quiet space for noticing the modern mind.</strong></p>
     </div>
-    <svg class="hero-sparkle" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-      <path d="M14 0 C14.5 9 19 13.5 28 14 C19 14.5 14.5 19 14 28 C13.5 19 9 14.5 0 14 C9 13.5 13.5 9 14 0Z" fill="rgba(255,255,255,0.6)"/>
-    </svg>
     <div class="scroll-hint" aria-hidden="true">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M4 7l6 6 6-6"/>
@@ -46,6 +43,11 @@ const recent = sorted.slice(0, 3);
         Some thoughts return without asking.
       </p>
     </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 7l6 6 6-6"/>
+      </svg>
+    </div>
   </section>
 
   <!-- Screen 3: Manifesto -->
@@ -57,6 +59,11 @@ const recent = sorted.slice(0, 3);
         No diagnosis.
       </p>
       <p class="manifesto-coda">Just a place to notice what stays.</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 7l6 6 6-6"/>
+      </svg>
     </div>
   </section>
 
@@ -176,18 +183,6 @@ const recent = sorted.slice(0, 3);
     line-height: var(--leading-body);
   }
 
-  .hero-sparkle {
-    position: absolute;
-    bottom: var(--space-10);
-    right: var(--space-10);
-    z-index: 1;
-    opacity: 0;
-    animation: sparkle-in 2s ease 1.5s forwards;
-  }
-
-  @keyframes sparkle-in {
-    to { opacity: 1; }
-  }
 
   .scroll-hint {
     position: absolute;
@@ -195,13 +190,23 @@ const recent = sorted.slice(0, 3);
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
+    color: var(--on-surface-variant);
+    opacity: 0.4;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .hero .scroll-hint {
     color: rgba(255, 255, 255, 0.5);
     opacity: 0;
     animation: fade-in 1.5s ease 2s forwards, float 3s ease-in-out 3.5s infinite;
   }
 
+  .manifesto .scroll-hint {
+    color: var(--on-surface-variant);
+  }
+
   @keyframes fade-in {
-    to { opacity: 1; }
+    to { opacity: 0.4; }
   }
 
   @keyframes float {
@@ -377,13 +382,6 @@ const recent = sorted.slice(0, 3);
       flex-direction: column;
       justify-content: center;
       padding-inline: var(--space-8);
-    }
-
-    .hero-sparkle {
-      bottom: var(--space-8);
-      right: var(--space-6);
-      width: 22px;
-      height: 22px;
     }
 
     .scroll-hint {
