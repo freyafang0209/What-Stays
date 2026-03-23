@@ -392,13 +392,69 @@ const recent = sorted.slice(0, 3);
       font-size: var(--headline-md);
     }
 
+    /* Manifesto: stacked layout — image on top, text below */
+    .manifesto {
+      flex-direction: column;
+      justify-content: flex-start;
+      background-color: var(--surface-container-low);
+    }
+
+    .manifesto-bg {
+      position: relative;
+      height: auto;
+      width: 100%;
+      flex-shrink: 0;
+      object-fit: contain;
+      object-position: top center;
+    }
+
+    .manifesto-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-inline: var(--space-6);
+    }
+
     .manifesto-text {
       font-size: var(--headline-sm);
+      margin-bottom: var(--space-6);
+    }
+
+    .manifesto-coda {
+      font-size: var(--body-md);
+    }
+
+    /* Recent articles */
+    .recent-section {
+      padding-block: var(--space-10);
+    }
+
+    .section-heading {
+      padding-inline: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .article-list {
+      padding-inline: var(--space-6);
     }
 
     .article-link {
       flex-direction: column;
       gap: var(--space-1);
+    }
+
+    .article-description {
+      font-size: var(--label-md);
+      line-height: 1.5;
+    }
+
+    .see-all {
+      padding-inline: var(--space-6);
+    }
+
+    .newsletter-section {
+      padding-block: var(--space-10);
     }
   }
 </style>
