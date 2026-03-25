@@ -1,0 +1,172 @@
+---
+interface Props {
+  context?: 'article' | 'homepage';
+}
+
+const { context = 'article' } = Astro.props;
+const heading = context === 'article' ? 'What stayed with you?' : 'Leave a thought';
+const note = context === 'article'
+  ? "If something here resonated \u2014 or raised a question \u2014 I'd like to hear it."
+  : "A reflection, a question, or just a quiet hello.";
+---
+
+<div class="reader-thoughts">
+  <p class="thoughts-heading">{heading}</p>
+  <p class="thoughts-note">{note}</p>
+  <form class="thoughts-form" data-thoughts>
+    <textarea
+      name="thought"
+      placeholder="Write here…"
+      rows="3"
+      required
+    ></textarea>
+    <div class="thoughts-footer">
+      <input
+        type="text"
+        name="name"
+        placeholder="Name (optional)"
+        autocomplete="name"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email (optional)"
+        autocomplete="email"
+      />
+      <button type="submit">Send</button>
+    </div>
+  </form>
+  <p class="thoughts-thanks" hidden>Thank you for sharing that.</p>
+</div>
+
+<script>
+  document.querySelectorAll('[data-thoughts]').forEach((form) => {
+    const thanks = form.nextElementSibling as HTMLElement;
+    const btn = form.querySelector('button') as HTMLButtonElement;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        const data = new FormData(form as HTMLFormElement);
+        data.append('_page', window.location.pathname);
+        await fetch('https://formspree.io/f/xqegzyqy', {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        (form as HTMLElement).hidden = true;
+        if (thanks) thanks.hidden = false;
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send';
+      }
+    });
+  });
+</script>
+
+<style>
+  .reader-thoughts {
+    max-width: 480px;
+  }
+
+  .thoughts-heading {
+    font-family: var(--font-serif);
+    font-size: var(--headline-sm);
+    color: var(--on-surface);
+    margin-bottom: var(--space-2);
+  }
+
+  .thoughts-note {
+    font-size: var(--body-md);
+    color: var(--on-surface-variant);
+    margin-bottom: var(--space-6);
+  }
+
+  .thoughts-form textarea {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: var(--body-md);
+    color: var(--on-surface);
+    background: var(--surface-container-high);
+    border: none;
+    border-bottom: 1px solid transparent;
+    padding: var(--space-4);
+    outline: none;
+    resize: vertical;
+    min-height: 5rem;
+    transition: border-color var(--ease-default), background-color var(--ease-default);
+  }
+
+  .thoughts-form textarea::placeholder {
+    color: var(--on-surface-variant);
+    opacity: 0.5;
+  }
+
+  .thoughts-form textarea:focus {
+    border-bottom-color: var(--primary);
+    background: var(--surface-container-highest);
+  }
+
+  .thoughts-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-3);
+  }
+
+  .thoughts-footer input {
+    flex: 1;
+    font-family: var(--font-sans);
+    font-size: var(--body-md);
+    color: var(--on-surface);
+    background: var(--surface-container-high);
+    border: none;
+    border-bottom: 1px solid transparent;
+    padding: var(--space-3) var(--space-4);
+    outline: none;
+    transition: border-color var(--ease-default), background-color var(--ease-default);
+  }
+
+  .thoughts-footer input::placeholder {
+    color: var(--on-surface-variant);
+    opacity: 0.5;
+  }
+
+  .thoughts-footer input:focus {
+    border-bottom-color: var(--primary);
+    background: var(--surface-container-highest);
+  }
+
+  .thoughts-footer button {
+    font-family: var(--font-sans);
+    font-size: var(--label-lg);
+    font-weight: 500;
+    color: var(--on-primary);
+    background: var(--primary);
+    border: none;
+    border-radius: 0.25rem;
+    padding: var(--space-3) var(--space-6);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color var(--ease-default);
+  }
+
+  .thoughts-footer button:hover {
+    background: var(--primary-container);
+  }
+
+  .thoughts-thanks {
+    font-family: var(--font-serif);
+    font-size: var(--body-lg);
+    color: var(--on-surface-variant);
+    font-style: italic;
+  }
+
+  @media (max-width: 480px) {
+    .thoughts-footer {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

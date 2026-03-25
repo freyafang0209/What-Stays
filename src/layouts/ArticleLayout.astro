@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import SupportSection from '../components/SupportSection.astro';
-import NewsletterForm from '../components/NewsletterForm.astro';
+import ReaderThoughts from '../components/ReaderThoughts.astro';
 
 interface Props {
   title: string;
@@ -39,10 +39,10 @@ const { title, subtitle, description, pubDate } = Astro.props;
       </div>
     </div>
 
-    <!-- Newsletter on tonal shift -->
-    <div class="newsletter-band">
+    <!-- Reader thoughts -->
+    <div class="thoughts-band">
       <div class="container--narrow">
-        <NewsletterForm />
+        <ReaderThoughts context="article" />
       </div>
     </div>
   </article>
@@ -109,7 +109,7 @@ const { title, subtitle, description, pubDate } = Astro.props;
     opacity: 0.5;
   }
 
-  .article-page .newsletter-band {
+  .article-page .thoughts-band {
     margin-top: var(--space-20);
     padding-block: var(--space-16);
     background-color: var(--surface-container-low);

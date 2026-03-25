@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import NewsletterForm from '../components/NewsletterForm.astro';
+
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
@@ -86,12 +86,6 @@ const recent = sorted.slice(0, 2);
     </div>
   </section>
 
-  <!-- Newsletter -->
-  <section class="newsletter-section">
-    <div class="container">
-      <NewsletterForm />
-    </div>
-  </section>
 </BaseLayout>
 
 <style is:global>
@@ -348,16 +342,6 @@ const recent = sorted.slice(0, 2);
     color: var(--primary-container);
   }
 
-  /* --- Newsletter --- */
-  .newsletter-section {
-    padding-block: var(--space-20);
-  }
-
-  .newsletter-section .container {
-    display: flex;
-    justify-content: center;
-  }
-
   /* --- Responsive --- */
   @media (max-width: 640px) {
     /* Hero: stacked layout — image on top, content below */
@@ -453,8 +437,5 @@ const recent = sorted.slice(0, 2);
       padding-inline: var(--space-6);
     }
 
-    .newsletter-section {
-      padding-block: var(--space-10);
-    }
   }
 </style>
