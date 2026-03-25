@@ -14,11 +14,8 @@ Yet as days pass, the emotional intensity settles.\
 What once felt exciting becomes quietly normal.
 
 The achievement remains real.\
-The memory remains significant.\
+The memory still holds weight.\
 But the intensity gradually softens.
-
-The mind quietly adjusts to what it once anticipated for so long.\
-What was once vivid becomes familiar.
 
 A new home becomes an ordinary environment.\
 A long-awaited goal becomes part of everyday life.\
@@ -38,7 +35,7 @@ yet still feel quietly sufficient.
 These forms of happiness are less vivid,\
 and therefore easier to overlook.
 
-Joy is not diminished.\
+Joy doesn't fade,\
 Just quietly absorbed into everyday perception.
 
 Happiness, then, may not be shorter.\

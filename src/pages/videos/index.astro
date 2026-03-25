@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Add YouTube video IDs and titles here
+const videos: { id: string; title: string }[] = [
+  // { id: 'dQw4w9WgXcQ', title: 'Example Video Title' },
+];
+---
+
+<BaseLayout title="Videos" description="Video reflections from What Stays.">
+  <section class="page">
+    <div class="container videos-layout">
+      <h1>Videos</h1>
+
+      {videos.length === 0 && (
+        <p class="empty-state">Coming soon.</p>
+      )}
+
+      <div class="video-list">
+        {videos.map(video => (
+          <div class="video-item">
+            <div class="video-embed">
+              <iframe
+                src={`https://www.youtube.com/embed/${video.id}`}
+                title={video.title}
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+            <h2 class="video-title">{video.title}</h2>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-16);
+  }
+
+  .videos-layout {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: var(--headline-lg);
+    font-weight: 400;
+    margin-bottom: var(--space-12);
+  }
+
+  .empty-state {
+    font-family: var(--font-serif);
+    font-size: var(--body-lg);
+    color: var(--on-surface-variant);
+    font-style: italic;
+  }
+
+  .video-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  .video-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    background-color: var(--surface-container);
+  }
+
+  .video-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-title {
+    font-family: var(--font-serif);
+    font-size: var(--headline-sm);
+    font-weight: 400;
+    margin-top: var(--space-4);
+  }
+
+  @media (max-width: 640px) {
+    h1 {
+      margin-bottom: var(--space-8);
+    }
+
+    .video-list {
+      gap: var(--space-10);
+    }
+  }
+</style>
