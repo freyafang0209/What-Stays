@@ -23,7 +23,7 @@ const { title, subtitle, description, pubDate } = Astro.props;
         {subtitle && <p class="subtitle">{subtitle}</p>}
       </header>
 
-      <div class="prose">
+      <div class="prose" id="article-prose">
         <slot />
       </div>
 
@@ -115,6 +115,69 @@ const { title, subtitle, description, pubDate } = Astro.props;
     background-color: var(--surface-container-low);
   }
 
+  /* --- Quiet Reflections reveal --- */
+  .article-page .reflection-section {
+    margin-top: 3em;
+    background-color: var(--surface-container-low);
+    padding: var(--space-8) var(--space-8) var(--space-6);
+  }
+
+  .article-page .reflection-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: var(--headline-sm);
+    color: var(--on-surface);
+    margin-bottom: var(--space-4);
+  }
+
+  .article-page .reflection-question {
+    font-family: var(--font-serif);
+    font-size: var(--body-lg);
+    color: var(--on-surface);
+    line-height: var(--leading-body);
+    margin-bottom: var(--space-4);
+  }
+
+  .article-page .reflection-reveal {
+    display: inline-block;
+    background: none;
+    border: none;
+    font-family: var(--font-serif);
+    font-size: var(--body-md);
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    padding: var(--space-2) 0;
+    min-height: 44px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+
+  .article-page .reflection-reveal:hover {
+    opacity: 0.85;
+  }
+
+  .article-page .reflection-answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.6s ease, opacity 0.5s ease 0.1s;
+  }
+
+  .article-page .reflection-answer.revealed {
+    max-height: 20em;
+    opacity: 1;
+  }
+
+  .article-page .reflection-answer p {
+    font-family: var(--font-serif);
+    font-size: var(--body-lg);
+    color: var(--on-surface-variant);
+    font-style: italic;
+    line-height: var(--leading-body);
+    margin-top: var(--space-4);
+  }
+
   @media (max-width: 640px) {
     .article-page {
       padding-top: var(--space-10);
@@ -134,3 +197,115 @@ const { title, subtitle, description, pubDate } = Astro.props;
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const prose = document.getElementById('article-prose');
+    if (!prose) return;
+
+    // Find the last <hr> — this precedes "Quiet Reflections"
+    const hrs = prose.querySelectorAll('hr');
+    if (hrs.length === 0) return;
+    const hr = hrs[hrs.length - 1];
+
+    // Collect all siblings after the <hr>
+    const siblings: Element[] = [];
+    let next = hr.nextElementSibling;
+    while (next) {
+      siblings.push(next);
+      next = next.nextElementSibling;
+    }
+    if (siblings.length === 0) return;
+
+    // Check if first sibling contains "Quiet Reflections"
+    const titleEl = siblings[0];
+    if (!titleEl.textContent?.includes('Quiet Reflections')) return;
+
+    // The content paragraph(s) follow the title — split question from answer
+    // Question = text up to and including the first "?"
+    // Answer = everything after
+    const contentEl = siblings[1];
+    if (!contentEl) return;
+
+    // Walk through child nodes of the content paragraph to split at "?"
+    const questionNodes: Node[] = [];
+    const answerNodes: Node[] = [];
+    let foundQuestion = false;
+
+    contentEl.childNodes.forEach(node => {
+      if (foundQuestion) {
+        answerNodes.push(node.cloneNode(true));
+        return;
+      }
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent || '';
+        const qIdx = text.indexOf('?');
+        if (qIdx !== -1) {
+          questionNodes.push(document.createTextNode(text.slice(0, qIdx + 1)));
+          const rest = text.slice(qIdx + 1).replace(/^\s*/, '');
+          if (rest) answerNodes.push(document.createTextNode(rest));
+          foundQuestion = true;
+        } else {
+          questionNodes.push(node.cloneNode(true));
+        }
+      } else {
+        // <br> or other elements
+        if (!foundQuestion) {
+          questionNodes.push(node.cloneNode(true));
+        } else {
+          answerNodes.push(node.cloneNode(true));
+        }
+      }
+    });
+
+    // Also gather any additional content paragraphs as answer content
+    const extraAnswerEls = siblings.slice(2);
+
+    // Remove original elements from DOM
+    hr.remove();
+    siblings.forEach(el => el.remove());
+
+    // Build the reflection section
+    const section = document.createElement('div');
+    section.className = 'reflection-section';
+
+    const title = document.createElement('p');
+    title.className = 'reflection-title';
+    title.textContent = 'Quiet Reflections';
+
+    const question = document.createElement('p');
+    question.className = 'reflection-question';
+    questionNodes.forEach(n => question.appendChild(n));
+
+    const btn = document.createElement('button');
+    btn.className = 'reflection-reveal';
+    btn.textContent = 'Pause and reflect';
+    btn.setAttribute('aria-expanded', 'false');
+
+    const answer = document.createElement('div');
+    answer.className = 'reflection-answer';
+    if (answerNodes.length > 0) {
+      // Strip leading <br> nodes
+      while (answerNodes.length && answerNodes[0].nodeName === 'BR') {
+        answerNodes.shift();
+      }
+      const answerP = document.createElement('p');
+      answerNodes.forEach(n => answerP.appendChild(n));
+      answer.appendChild(answerP);
+    }
+    extraAnswerEls.forEach(el => answer.appendChild(el));
+
+    btn.addEventListener('click', () => {
+      answer.classList.add('revealed');
+      btn.style.opacity = '0';
+      btn.style.pointerEvents = 'none';
+      btn.setAttribute('aria-expanded', 'true');
+    });
+
+    section.appendChild(title);
+    section.appendChild(question);
+    section.appendChild(btn);
+    section.appendChild(answer);
+    prose.appendChild(section);
+  });
+</script>

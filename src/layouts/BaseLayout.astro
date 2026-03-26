@@ -13,7 +13,7 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content={description} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -55,6 +55,9 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
 
   .site-header {
     padding-block: var(--space-8);
+    padding-top: calc(var(--space-8) + env(safe-area-inset-top, 0px));
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
   }
 
   .site-header nav {
@@ -87,6 +90,7 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
     color: var(--on-surface-variant);
     text-decoration: none;
     letter-spacing: 0.02em;
+    padding-block: var(--space-2);
     transition: color var(--ease-default);
   }
 
@@ -102,6 +106,9 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
   .site-footer {
     margin-top: var(--space-24);
     padding-block: var(--space-10);
+    padding-bottom: calc(var(--space-10) + env(safe-area-inset-bottom, 0px));
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
     background-color: var(--surface-container-low);
   }
 
@@ -144,5 +151,35 @@ const fullTitle = title === 'What Stays' ? title : `${title} — What Stays`;
 
   :global(body.fullscreen-hero) {
     background-color: transparent;
+  }
+
+  /* --- Mobile --- */
+  @media (max-width: 640px) {
+    .site-header {
+      padding-block: var(--space-6);
+      padding-top: calc(var(--space-6) + env(safe-area-inset-top, 0px));
+    }
+
+    .site-name {
+      font-size: 1.35rem;
+    }
+
+    .nav-links {
+      gap: var(--space-6);
+    }
+
+    .nav-links a {
+      font-size: var(--label-md);
+    }
+
+    .site-footer {
+      margin-top: var(--space-16);
+      padding-block: var(--space-8);
+      padding-bottom: calc(var(--space-8) + env(safe-area-inset-bottom, 0px));
+    }
+
+    .footer-name {
+      font-size: var(--body-md);
+    }
   }
 </style>

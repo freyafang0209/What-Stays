@@ -86,7 +86,7 @@ const note = context === 'article'
   .thoughts-form textarea {
     width: 100%;
     font-family: var(--font-sans);
-    font-size: var(--body-md);
+    font-size: 1rem;
     color: var(--on-surface);
     background: var(--surface-container-high);
     border: none;
@@ -118,12 +118,13 @@ const note = context === 'article'
   .thoughts-footer input {
     flex: 1;
     font-family: var(--font-sans);
-    font-size: var(--body-md);
+    font-size: 1rem;
     color: var(--on-surface);
     background: var(--surface-container-high);
     border: none;
     border-bottom: 1px solid transparent;
     padding: var(--space-3) var(--space-4);
+    min-height: 44px;
     outline: none;
     transition: border-color var(--ease-default), background-color var(--ease-default);
   }
@@ -147,6 +148,7 @@ const note = context === 'article'
     border: none;
     border-radius: 0.25rem;
     padding: var(--space-3) var(--space-6);
+    min-height: 44px;
     cursor: pointer;
     white-space: nowrap;
     transition: background-color var(--ease-default);

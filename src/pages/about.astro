@@ -65,6 +65,7 @@ import SupportSection from '../components/SupportSection.astro';
     padding-top: var(--space-20);
     padding-bottom: var(--space-16);
     min-height: 100vh;
+    min-height: 100svh;
   }
 
   .about-bg {
@@ -114,6 +115,20 @@ import SupportSection from '../components/SupportSection.astro';
     .about-layout {
       flex-direction: column;
     }
+  }
 
+  @media (max-width: 640px) {
+    .page {
+      padding-top: var(--space-16);
+      padding-bottom: var(--space-10);
+    }
+
+    h1 {
+      margin-bottom: var(--space-8);
+    }
+
+    .support-wrap {
+      margin-top: var(--space-10);
+    }
   }
 </style>

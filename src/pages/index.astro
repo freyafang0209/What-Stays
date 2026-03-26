@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
 const sorted = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const recent = sorted.slice(0, 2);
+const writings = sorted;
 ---
 
 <BaseLayout title="What Stays" fullscreenHero>
@@ -67,22 +67,24 @@ const recent = sorted.slice(0, 2);
     </div>
   </section>
 
-  <!-- Recent articles -->
-  <section class="recent-section">
+  <!-- Writings -->
+  <section class="writings-section">
     <div class="container">
-      <h2 class="section-heading">Recent</h2>
-      <ul class="article-list">
-        {recent.map(article => (
-          <li class="article-item">
-            <a href={`/articles/${article.id}/`} class="article-link">
-              <span class="article-title">{article.data.title}</span>
-              <span class="article-meta"><FormattedDate date={article.data.pubDate} /></span>
-            </a>
-            <p class="article-description">{article.data.description}</p>
-          </li>
-        ))}
-      </ul>
-      <a href="/articles/" class="see-all">All writings</a>
+      <h2 class="section-heading">Writings</h2>
+      <div class="writings-scroll-wrapper">
+        <ul class="article-list">
+          {writings.map(article => (
+            <li class="article-item">
+              <a href={`/articles/${article.id}/`} class="article-link">
+                <span class="article-title">{article.data.title}</span>
+                <span class="article-meta"><FormattedDate date={article.data.pubDate} /></span>
+              </a>
+              <p class="article-description">{article.data.description}</p>
+            </li>
+          ))}
+        </ul>
+        <div class="scroll-fade" aria-hidden="true"></div>
+      </div>
     </div>
   </section>
 
@@ -220,8 +222,8 @@ const recent = sorted.slice(0, 2);
 
   .philosophy-text {
     font-family: var(--font-serif);
-    font-size: var(--headline-lg);
-    line-height: var(--leading-headline);
+    font-size: 1.75rem;
+    line-height: 1.5;
     color: var(--on-surface);
   }
 
@@ -262,8 +264,8 @@ const recent = sorted.slice(0, 2);
     font-style: italic;
   }
 
-  /* --- Recent --- */
-  .recent-section {
+  /* --- Writings --- */
+  .writings-section {
     padding-block: var(--space-16);
     background-color: var(--surface-container-low);
   }
@@ -277,10 +279,32 @@ const recent = sorted.slice(0, 2);
     margin-bottom: var(--space-8);
   }
 
-  .article-list {
-    list-style: none;
+  .writings-scroll-wrapper {
+    position: relative;
     max-width: 600px;
     margin-inline: auto;
+    max-height: 54vh;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .writings-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-fade {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4rem;
+    background: linear-gradient(to bottom, transparent, var(--surface-container-low));
+    pointer-events: none;
+  }
+
+  .article-list {
+    list-style: none;
   }
 
   .article-item {
@@ -325,23 +349,6 @@ const recent = sorted.slice(0, 2);
     max-width: 50ch;
   }
 
-  .see-all {
-    display: block;
-    max-width: 600px;
-    margin-inline: auto;
-    margin-top: var(--space-8);
-    font-family: var(--font-sans);
-    font-size: var(--label-lg);
-    font-weight: 500;
-    color: var(--primary);
-    letter-spacing: 0.02em;
-    transition: color var(--ease-default);
-  }
-
-  .see-all:hover {
-    color: var(--primary-container);
-  }
-
   /* --- Responsive --- */
   @media (max-width: 640px) {
     /* Hero: stacked layout — image on top, content below */
@@ -373,7 +380,8 @@ const recent = sorted.slice(0, 2);
     }
 
     .philosophy-text {
-      font-size: var(--headline-md);
+      font-size: 1.4rem;
+      line-height: 1.55;
     }
 
     /* Manifesto: stacked layout — image on top, text below */
@@ -409,14 +417,18 @@ const recent = sorted.slice(0, 2);
       font-size: var(--body-md);
     }
 
-    /* Recent articles */
-    .recent-section {
+    /* Writings */
+    .writings-section {
       padding-block: var(--space-10);
     }
 
     .section-heading {
       padding-inline: var(--space-6);
       margin-bottom: var(--space-6);
+    }
+
+    .writings-scroll-wrapper {
+      max-height: 50vh;
     }
 
     .article-list {
@@ -431,10 +443,6 @@ const recent = sorted.slice(0, 2);
     .article-description {
       font-size: var(--label-md);
       line-height: 1.5;
-    }
-
-    .see-all {
-      padding-inline: var(--space-6);
     }
 
   }
