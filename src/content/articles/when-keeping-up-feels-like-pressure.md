@@ -8,20 +8,13 @@ tags: ["comparison", "pressure", "pace"]
 A friend shares a promotion.\
 A new project is launched.\
 Somewhere, a debate unfolds about the future—\
-technology, housing markets, or where the world is heading.
+the technology, the cost of living crisis\
+or where the world is heading.
 
-None of it is negative.\
-In many ways,\
-these are just signs of life in motion.\
-Yet, a quiet question arrives:\
+
+And in all that movement,\
+a quiet question arrives:\
 Am I moving fast enough?
-
-It isn't always a worry.\
-Often, it is just a silent comparison.\
-In a world of visible movement,\
-every update becomes a signal of progress.\
-And slowly, it begins to feel\
-as if everyone has found their direction.
 
 When acceleration is everywhere,\
 stillness starts to feel uncomfortable.\
@@ -40,6 +33,10 @@ changes the way we see our own.
 
 Nothing has truly changed.\
 Only the sense of pace has quietly shifted.
+
+The world remains as wide as it ever was.\
+It doesn't have to be measured\
+by how fast it moves.
 
 ---
 
