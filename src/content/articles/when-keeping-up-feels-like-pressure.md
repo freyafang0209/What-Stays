@@ -38,6 +38,9 @@ The world remains as wide as it ever was.\
 It doesn't have to be measured\
 by how fast it moves.
 
+Speed fills the surface.\
+Depth keeps its own pace.
+
 ---
 
 *Quiet Reflections*
