@@ -9,7 +9,7 @@ const sorted = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubD
 
 <BaseLayout title="Writings" description="All writings from What Stays.">
   <section class="page">
-    <div class="container">
+    <div class="container writings-layout">
       <h1>Writings</h1>
 
       <ul class="article-list">
@@ -33,19 +33,19 @@ const sorted = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubD
     padding-bottom: var(--space-16);
   }
 
+  .writings-layout {
+    max-width: 640px;
+  }
+
   h1 {
     font-family: var(--font-serif);
     font-size: var(--headline-lg);
     font-weight: 400;
-    max-width: 600px;
-    margin-inline: auto;
     margin-bottom: var(--space-12);
   }
 
   .article-list {
     list-style: none;
-    max-width: 600px;
-    margin-inline: auto;
   }
 
   .article-item {
