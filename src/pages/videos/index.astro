@@ -89,12 +89,21 @@ const videos: { id: string; title: string }[] = [
   }
 
   @media (max-width: 640px) {
+    .page {
+      padding-top: var(--space-16);
+      padding-bottom: var(--space-10);
+    }
+
     h1 {
       margin-bottom: var(--space-8);
     }
 
     .video-list {
       gap: var(--space-10);
+    }
+
+    .video-title {
+      font-size: var(--body-lg);
     }
   }
 </style>
