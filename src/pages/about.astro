@@ -119,13 +119,22 @@ import SupportSection from '../components/SupportSection.astro';
 
   @media (max-width: 640px) {
     .about-bg {
-      object-position: top center;
-      opacity: 0.12;
+      position: relative;
+      height: auto;
+      max-height: 30vh;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.35;
     }
 
     .page {
-      padding-top: var(--space-10);
+      padding-top: 0;
       padding-bottom: var(--space-10);
+      min-height: auto;
+    }
+
+    .about-layout {
+      padding-top: var(--space-8);
     }
 
     h1 {
