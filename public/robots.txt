@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://what-stays.vercel.app/sitemap-index.xml
