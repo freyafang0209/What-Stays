@@ -8,6 +8,7 @@ const videos: { id: string; title: string }[] = [
 ];
 
 const reversed = [...videos].reverse();
+const useStrip = reversed.length >= 3;
 const featured = reversed[0];
 const others = reversed.slice(1);
 ---
@@ -21,7 +22,28 @@ const others = reversed.slice(1);
         <p class="empty-state">Coming soon.</p>
       )}
 
-      {videos.length > 0 && (
+      {/* Simple stacked layout for 1-2 videos */}
+      {!useStrip && reversed.length > 0 && (
+        <div class="video-list">
+          {reversed.map(video => (
+            <div class="video-item">
+              <div class="video-embed">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}`}
+                  title={video.title}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                />
+              </div>
+              <h2 class="video-title">{video.title}</h2>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Featured + thumbnail strip for 3+ videos */}
+      {useStrip && (
         <div class="featured" id="featured">
           <div class="video-embed">
             <iframe
@@ -37,7 +59,7 @@ const others = reversed.slice(1);
         </div>
       )}
 
-      {others.length > 0 && (
+      {useStrip && others.length > 0 && (
         <div class="strip-section">
           <div class="strip" id="strip">
             {others.map(video => (
@@ -121,6 +143,20 @@ const others = reversed.slice(1);
     font-size: var(--body-lg);
     color: var(--on-surface-variant);
     font-style: italic;
+  }
+
+  /* Stacked layout (1-2 videos) */
+  .video-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  .video-title {
+    font-family: var(--font-serif);
+    font-size: var(--headline-sm);
+    font-weight: 400;
+    margin-top: var(--space-4);
   }
 
   /* Featured video */
@@ -212,6 +248,17 @@ const others = reversed.slice(1);
 
     h1 {
       margin-bottom: var(--space-8);
+    }
+
+    /* Stacked layout on mobile */
+    .video-list {
+      gap: var(--space-12);
+      margin-inline: calc(-1 * clamp(2rem, 6vw, 5rem));
+    }
+
+    .video-title {
+      font-size: var(--body-lg);
+      padding-inline: clamp(2rem, 6vw, 5rem);
     }
 
     /* Featured video goes edge-to-edge */
