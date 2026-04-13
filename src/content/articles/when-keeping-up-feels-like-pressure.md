@@ -6,14 +6,15 @@ tags: ["comparison", "pressure", "pace"]
 ---
 
 A friend shares a promotion.\
-A new project is launched.\
+A peer announces they've hit "FIRE."\
 Somewhere, a debate unfolds about the future—\
-the technology, the cost of living crisis\
+the technology, the cost of living crisis
 or where the world is heading.
 
 
-And in all that movement,\
-a quiet question arrives:\
+Everyone seems to be on the same fast track, moving in a big rush.\
+While you are standing outside the flow,\
+a quiet question arrives:
 Am I moving fast enough?
 
 When acceleration is everywhere,\
@@ -31,12 +32,14 @@ what others are doing.\
 It comes from how their velocity\
 changes the way we see our own.
 
-Nothing has truly changed.\
-Only the sense of pace has quietly shifted.
+We live in a system designed for comparison,\
+one that glorifies only the most visible kinds of success.
 
-The world remains as wide as it ever was.\
-It doesn't have to be measured\
-by how fast it moves.
+But moving fast is a waste if the direction isn't yours,\
+and moving forward is hollow without the will to go deep.
+
+The world remains as wide as it ever was;\
+only our focus has narrowed.
 
 Speed fills the surface.\
 Depth keeps its own pace.
